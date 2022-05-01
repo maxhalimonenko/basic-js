@@ -1,25 +1,25 @@
-const { NotImplementedError } = require('../extensions/index.js');
-
-/**
- * Create a repeating string based on the given parameters
- *  
- * @param {String} str string to repeat
- * @param {Object} options options object 
- * @return {String} repeating string
- * 
- *
- * @example
- * 
- * repeater('STRING', { repeatTimes: 3, separator: '**', 
- * addition: 'PLUS', additionRepeatTimes: 3, additionSeparator: '00' })
- * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
- *
- */
-function repeater(/* str, options */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
-
-module.exports = {
+function repeater(str, options) {
+  const addArray = [];  
+  for (let i = 0; i < options.additionRepeatTimes; i++) {
+  addArray.push(String(options.addition));
+  }  
+  const addString = addArray.join(options.additionSeparator || '|'); 
+  if (addString.length !== 0) {
+  addArray.length = 0;  
+  for (let j = 0; j < options.repeatTimes; j++) {
+  addArray.push(String(str) + addString);
+  }
+  } else {
+  if (!options.repeatTimes) {
+  addArray.push(String(str) + String(options.addition));
+  } else {
+  for (let j = 0; j < options.repeatTimes; j++) {
+  !options.addition ? addArray.push(String(str)) : addArray.push(String(str) + String(options.addition));
+  }
+  }  
+  }  
+  return addArray.join(options.separator || '+');
+  }  
+  module.exports = {
   repeater
-};
+  };
