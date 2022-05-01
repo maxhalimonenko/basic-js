@@ -1,6 +1,6 @@
-function getCommonCharacterCount(s1, s2) {
-  let a1 = s1.split('');
-  let a2 = s2.split('');
+function getCommonCharacterCount(m1, m2) {
+  let a1 = m1.split('');
+  let a2 = m2.split('');
   let count = 0;
   for (let i = 0; i < a1.length; i++) {
     for (let j = 0; j < a2.length; j++) {
