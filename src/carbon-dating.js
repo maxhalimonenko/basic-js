@@ -1,14 +1,14 @@
 const MODERN_ACTIVITY = 15;
 const HALF_LIFE_PERIOD = 5730;
+const NATURAL_LOGARITHM_OF_2 = 0.693;
+const RADIOACTIVE_DECAY_CONSTANT = NATURAL_LOGARITHM_OF_2 / HALF_LIFE_PERIOD;
 function dateSample(sampleActivity) {
-  if (typeof sampleActivity !== 'string') return false
-  const number = Number(sampleActivity)
-  if (number < 0 || number !== number || number > 15 || number === 0) return false
-  const ln = 0.693
-  const k = ln / HALF_LIFE_PERIOD
-  const res = Math.log(MODERN_ACTIVITY / number) / k
-  return Math.ceil(res)
+  if (typeof sampleActivity !== 'string') return false;
+  const parsedSampleActivity = parseFloat(sampleActivity);
+  if (isNaN(parsedSampleActivity) || parsedSampleActivity > 15 || parsedSampleActivity <= 0) return false;
+  const sampleApproximateAge = Math.ceil((Math.log(MODERN_ACTIVITY / parsedSampleActivity)) / RADIOACTIVE_DECAY_CONSTANT);
+  return sampleApproximateAge;
 }
-
 module.exports = {
-  };``
+  dateSample
+};
